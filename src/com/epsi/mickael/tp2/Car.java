@@ -2,6 +2,7 @@ package com.epsi.mickael.tp2;
 
 public class Car {
 
+    //protected int id;
     protected String licence;
     protected int nbPlace;
 
@@ -36,5 +37,8 @@ public class Car {
         return this;
     }
 
+    public String getHash() {
+        return this.licence+this.nbPlace;
+    }
 
 }

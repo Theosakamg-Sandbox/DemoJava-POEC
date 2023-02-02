@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 public class Tp02 {
 
+    private Parking parking = new Parking();
+
     public static void main(String[] args) {
         Tp02 app = new Tp02();
         app.mainLoop();
@@ -24,17 +26,23 @@ public class Tp02 {
             choice = sc.nextLine().toUpperCase();
 
             // Analyse de la saisie.
+            String ticket;
             switch (choice) {
             case "A":
                 // Depose
                 System.out.println("Case A");
-                Car car = new Car("AAAAA", 4);
-
+                Car car = new Car("AAAAA", 4); // UI ???
+                ticket = this.parking.put(car);
+                System.out.println(String.format("Votre ticket : %s", ticket));
                 break;
 
             case "B":
                 // Recup
                 System.out.println("Case B");
+                // UI ????
+                ticket = "AAAAA4";
+                Car aCar = this.parking.pop(ticket);
+                System.out.println(String.format("Voiture N° : %s", aCar.getLicence()));
                 break;
 
             case "Q": break;
