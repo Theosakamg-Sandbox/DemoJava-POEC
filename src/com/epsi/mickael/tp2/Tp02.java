@@ -64,9 +64,24 @@ public class Tp02 {
         System.out.println("Quel est le nombre de place :");
         int nbPlace = Integer.parseInt(this.sc.nextLine());
 
-        final Car car = new Car(licence, nbPlace);
+        System.out.println("Quel est le type de Vehicule :\n\t- V : Voiture\n\t- M : Moto");
+        String vehiculeChoice = this.sc.nextLine().toUpperCase();
 
-        ticket = this.parking.put(car);
+        Vehicle vehicle = null;
+        switch (vehiculeChoice) {
+        case "V":
+            vehicle = new Car(licence, nbPlace);
+            break;
+        case "M":
+            vehicle = new Bike(licence, nbPlace);
+            break;
+
+        default:
+            System.out.println("No good type !");
+            return;
+        }
+
+        ticket = this.parking.put(vehicle);
         System.out.println(String.format("Ticket : %s", ticket));
       }
 
@@ -81,7 +96,7 @@ public class Tp02 {
 
         if (!ticket.isEmpty()) {
 
-          final Car extractedCar = this.parking.pop(ticket);
+          final Vehicle extractedCar = this.parking.pop(ticket);
           if (extractedCar != null) {
             System.out.println(String.format("Voici votre vehicule : %s", extractedCar.getLicence()));
           } else {

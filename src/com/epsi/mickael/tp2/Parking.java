@@ -5,23 +5,23 @@ import java.util.ArrayList;
 public class Parking {
 
     protected int maxPlace = 3;
-    private ArrayList<Car> storage = new ArrayList<>();
+    private ArrayList<Vehicle> storage = new ArrayList<>();
 
     // Déposer voiture
-    public String put(Car car) {
+    public String put(Vehicle vehicle) {
         if (this.storage.size() < this.maxPlace)
-            this.storage.add(car);
+            this.storage.add(vehicle);
 
-        return car.getHash();
+        return vehicle.getHash();
     }
 
     // Récupérer une voiture.
-    public Car pop(String ticket) {
-        Car result = null;
+    public Vehicle pop(String ticket) {
+        Vehicle result = null;
 
-        for (Car car : this.storage) {
-            if (ticket.equals(car.getHash())) {
-                result = car;
+        for (Vehicle vehicle : this.storage) {
+            if (ticket.equals(vehicle.getHash())) {
+                result = vehicle;
                 break; // Optim !
             }
         }
