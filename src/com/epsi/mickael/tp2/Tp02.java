@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class Tp02 {
 
+    private Scanner sc;
     private Parking parking = new Parking();
 
     public static void main(String[] args) {
@@ -11,9 +12,12 @@ public class Tp02 {
         app.mainLoop();
     }
 
+    /**
+     * Main loop
+     */
     public void mainLoop() {
         // Initialization des variables/objet.
-        final Scanner sc = new Scanner(System.in);
+        this.sc = new Scanner(System.in);
         String choice = null;
 
         do {
@@ -29,20 +33,11 @@ public class Tp02 {
             String ticket;
             switch (choice) {
             case "A":
-                // Depose
-                System.out.println("Case A");
-                Car car = new Car("AAAAA", 4); // UI ???
-                ticket = this.parking.put(car);
-                System.out.println(String.format("Votre ticket : %s", ticket));
+                this.putCar();
                 break;
 
             case "B":
-                // Recup
-                System.out.println("Case B");
-                // UI ????
-                ticket = "AAAAA4";
-                Car aCar = this.parking.pop(ticket);
-                System.out.println(String.format("Voiture N° : %s", aCar.getLicence()));
+                this.popCar();
                 break;
 
             case "Q": break;
@@ -57,4 +52,43 @@ public class Tp02 {
         sc.close();
     }
 
+    /**
+     * UI to get car and put into parking.
+     */
+    private void putCar() {
+        String ticket = null;
+
+        System.out.println("Quel est le numéros d'immatriculation :");
+        String licence = this.sc.nextLine();
+
+        System.out.println("Quel est le nombre de place :");
+        int nbPlace = Integer.parseInt(this.sc.nextLine());
+
+        final Car car = new Car(licence, nbPlace);
+
+        ticket = this.parking.put(car);
+        System.out.println(String.format("Ticket : %s", ticket));
+      }
+
+    /**
+     * UI to get car from parking (base on ticket)
+     */
+    private void popCar() {
+        String ticket = null;
+
+        System.out.println("Quel est votre Ticket :");
+        ticket = this.sc.nextLine().toUpperCase();
+
+        if (!ticket.isEmpty()) {
+
+          final Car extractedCar = this.parking.pop(ticket);
+          if (extractedCar != null) {
+            System.out.println(String.format("Voici votre vehicule : %s", extractedCar.getLicence()));
+          } else {
+            System.out.println("Vehicule non trouvé");
+          }
+        } else {
+          System.out.println("Votre ticket est invalide !");
+        }
+      }
 }
