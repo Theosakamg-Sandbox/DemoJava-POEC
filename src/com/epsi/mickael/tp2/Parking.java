@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Parking {
 
-    protected int maxPlace = 1;
+    protected int maxPlace = 10;
     private ArrayList<Vehicle> storage = new ArrayList<>();
 
     public ArrayList<Vehicle> getSnapStorage() {

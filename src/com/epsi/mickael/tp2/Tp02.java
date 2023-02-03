@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 public class Tp02 {
 
+    private Logger log;
     private Scanner sc;
     private Parking parking = new Parking();
 
@@ -18,6 +19,7 @@ public class Tp02 {
      */
     public void mainLoop() {
         // Initialization des variables/objet.
+        this.log = new Logger();
         this.sc = new Scanner(System.in);
         String choice = null;
 
@@ -55,7 +57,8 @@ public class Tp02 {
 
         } while (!choice.equals("Q"));
 
-        sc.close();
+        this.sc.close();
+        this.log.close();
     }
 
     private void displayStat() {
@@ -109,6 +112,7 @@ public class Tp02 {
 
         try {
             ticket = this.parking.put(vehicle);
+            this.log.info(vehicle, ParkingDirection.IN);
             System.out.println(String.format("Ticket : %s", ticket));
         } catch (ParkingFullException e) {
             System.out.println("Le parking est plein.");
@@ -128,6 +132,7 @@ public class Tp02 {
 
           final Vehicle extractedCar = this.parking.pop(ticket);
           if (extractedCar != null) {
+            this.log.info(extractedCar, ParkingDirection.OUT);
             System.out.println(String.format("Voici votre vehicule : %s", extractedCar.getLicence()));
           } else {
             System.out.println("Vehicule non trouvé");
