@@ -1,5 +1,6 @@
 package com.epsi.mickael.tp2;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Tp02 {
@@ -24,6 +25,7 @@ public class Tp02 {
             System.out.println("Quel est l'activité :\n"
                     + "\t- A : Depose d'un vehicule\n"
                     + "\t- B : Reprise d'un vehicule\n"
+                    + "\t- S : Stat du parking\n"
                     + "\t- Q : Quitter");
 
             // Recupération de la saisie.
@@ -40,6 +42,10 @@ public class Tp02 {
                 this.popCar();
                 break;
 
+            case "S":
+                this.displayStat();
+                break;
+
             case "Q": break;
 
             default:
@@ -50,6 +56,26 @@ public class Tp02 {
         } while (!choice.equals("Q"));
 
         sc.close();
+    }
+
+    private void displayStat() {
+        ArrayList<Vehicle> snapParking = this.parking.getSnapStorage();
+        int countBike = 0, countCar = 0;
+
+        for (Vehicle vehicle : snapParking) {
+            if (vehicle instanceof Car) {
+                countCar++;
+            } else {
+                countBike++;
+            }
+        }
+
+        System.out.println(
+                String.format(
+                        "Stat du parking\n\tOccupation: %d\n\t Moto : %d\n\t Voiture %d",
+                        snapParking.size(),
+                        countBike ,
+                        countCar));
     }
 
     /**

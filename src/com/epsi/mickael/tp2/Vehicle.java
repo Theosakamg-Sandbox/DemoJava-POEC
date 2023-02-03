@@ -41,4 +41,8 @@ public abstract class Vehicle {
         return this.licence+this.nbPlace;
     }
 
+//    @Override
+//    public String toString() {
+//        return String.format("Licence %s [%s]", this.licence, this.getClass().getName());
+//    }
 }

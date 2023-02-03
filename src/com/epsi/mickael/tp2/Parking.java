@@ -4,8 +4,14 @@ import java.util.ArrayList;
 
 public class Parking {
 
-    protected int maxPlace = 3;
+    protected int maxPlace = 100;
     private ArrayList<Vehicle> storage = new ArrayList<>();
+
+    public ArrayList<Vehicle> getSnapStorage() {
+         return (ArrayList<Vehicle>) this.storage.clone();
+         //return new ArrayList<Vehicle>();
+    }
+
 
     // Déposer voiture
     public String put(Vehicle vehicle) {
