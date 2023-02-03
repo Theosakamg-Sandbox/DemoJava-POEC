@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Parking {
 
-    protected int maxPlace = 100;
+    protected int maxPlace = 1;
     private ArrayList<Vehicle> storage = new ArrayList<>();
 
     public ArrayList<Vehicle> getSnapStorage() {
@@ -14,9 +14,18 @@ public class Parking {
 
 
     // Déposer voiture
-    public String put(Vehicle vehicle) {
-        if (this.storage.size() < this.maxPlace)
+    /**
+     * Ajout un vehicule dans le parking en echange d'un ticket.
+     * @param vehicle a garer dans le parking.
+     * @return Le ticket d'identification.
+     * @throws ParkingFullException est déclenché si le parking est plein.
+     */
+    public String put(Vehicle vehicle) throws ParkingFullException {
+        if (this.storage.size() < this.maxPlace) {
             this.storage.add(vehicle);
+        } else {
+            throw new ParkingFullException();
+        }
 
         return vehicle.getHash();
     }

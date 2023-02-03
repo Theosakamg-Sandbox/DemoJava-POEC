@@ -107,8 +107,12 @@ public class Tp02 {
             return;
         }
 
-        ticket = this.parking.put(vehicle);
-        System.out.println(String.format("Ticket : %s", ticket));
+        try {
+            ticket = this.parking.put(vehicle);
+            System.out.println(String.format("Ticket : %s", ticket));
+        } catch (ParkingFullException e) {
+            System.out.println("Le parking est plein.");
+        }
       }
 
     /**
